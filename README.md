@@ -163,6 +163,83 @@ http://localhost:3000
 | DELETE | /api/tasks/:id | Delete a task |
 
 ---
+## ER Diagram
+
+The application uses a simple data model centered around the **Task** entity.
+
+```
++-----------------------+
+|        Task           |
++-----------------------+
+| _id                   |
+| title                 |
+| description           |
+| status                |
+| dueDate               |
+| remarks               |
+| createdOn             |
+| updatedOn             |
+| createdBy             |
+| updatedBy             |
++-----------------------+
+```
+
+### Description
+
+Each **Task** represents a unit of work that can be created, updated, searched, and deleted.
+
+Primary key:
+
+```
+_id (MongoDB ObjectId)
+```
+
+Fields store task information including title, description, status, and timestamps.
+
+---
+## Data Dictionary
+
+| Field       | Type     | Description                          |
+| ----------- | -------- | ------------------------------------ |
+| _id         | ObjectId | Unique identifier for task           |
+| title       | String   | Task title                           |
+| description | String   | Task description                     |
+| status      | String   | Task state (Pending / Completed)     |
+| dueDate     | Date     | Deadline for task                    |
+| remarks     | String   | Additional task notes                |
+| createdOn   | Date     | Timestamp when task was created      |
+| updatedOn   | Date     | Timestamp when task was last updated |
+| createdBy   | String   | User who created the task            |
+| updatedBy   | String   | User who last modified the task      |
+
+---
+## Deployment Architecture
+
+The application follows a **client-server architecture**.
+
+```
+User Browser
+     │
+     ▼
+React Frontend (Port 3000)
+     │
+     ▼
+Express Backend API (Port 5000)
+     │
+     ▼
+MongoDB Database
+```
+
+### Explanation
+
+* The **React frontend** provides the user interface.
+* The frontend communicates with the backend using **REST API calls via Axios**.
+* The **Node.js + Express backend** processes requests and handles business logic.
+* **MongoDB** stores task data using a flexible NoSQL schema.
+
+This architecture separates the **presentation layer**, **application logic**, and **data layer**, improving maintainability and scalability.
+
+---
 
 ## Future Improvements
 
